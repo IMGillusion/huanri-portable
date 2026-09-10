@@ -1,0 +1,50 @@
+# ============================================================
+# 幻盘配置模板 · huanri.example.yaml
+# ============================================================
+# 你一般不用手改这个文件。
+# 正常路径是跑  start.sh / start.bat  → 自动进 Hermes 配置向导
+# （hermes setup），向导会问你模型和通道，填完自动存到
+#   portable/data/.huanri/config.yaml   （跟盘走）
+#
+# 这个模板是给你看「一份配置长什么样」的参考，真要手改就
+# 拷一份到 data/.huanri/config.yaml 再编辑。
+# ------------------------------------------------------------
+
+# --- 模型（必填，你的 AI 大脑从哪来） ----------------------
+# 三选一：
+#   1) 用你自己买的大模型 API（推荐，OpenAI 兼容接口都能接）
+#   2) 用官方 OAuth（hermes login 登录对应平台）
+#   3) 用一个中转/聚合服务（见 docs/定价.md 的增值项）
+model:
+  provider: openai            # openai / anthropic / custom / ...
+  base_url: https://api.openai.com/v1
+  api_key: "your-api-key"      # 你的 Key，别提交到 git
+  model: gpt-4o
+
+# 可选：主模型挂了自动切备用
+fallback_providers:
+  - provider: openai
+    model: gpt-4o-mini
+
+# --- 通道（分身从哪个平台跟你说话） ------------------------
+# 跑 hermes setup 时选平台并填 token 即可，常见平台：
+#   telegram / discord / slack / qqbot / weixin / feishu / email / sms
+# 下面只是示意，实际以向导生成的 config.yaml 为准。
+gateway:
+  telegram:
+    enabled: true
+    bot_token: "123456:***"
+  discord:
+    enabled: false
+    token: ""
+  qqbot:
+    enabled: false
+    # QQ 走官方 bot 接口或第三方网关，token 见各自文档
+    token: ""
+
+# --- 人格底座（可选，让分身「像你」） ----------------------
+# 把你想让分身具备的性格/称呼/边界写进 persona.md，
+# 向导会放到 data/.huanri/persona.md。不写就是个默认助手。
+# 例：
+#   我管用户叫「老板」，说话短、直接，不爱用感叹号。
+#   不聊隐私，不碰钱。

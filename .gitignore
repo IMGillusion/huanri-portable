@@ -1,0 +1,14 @@
+# 运行时/用户数据都不进 git——这些是「每个用户盘上各一份」的东西
+portable/venv/
+portable/.hermes-src/
+portable/data/.huanri/*
+!portable/data/.huanri/.gitkeep
+portable/data/gateway.log
+
+# Python 杂项
+__pycache__/
+*.pyc
+.venv/
+
+# 系统
+.DS_Store
